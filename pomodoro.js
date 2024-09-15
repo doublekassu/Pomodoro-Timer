@@ -3,12 +3,16 @@ const startTimerButtonQuery = document.querySelector("#start-timer");
 const resetTimerButtonQuery = document.getElementById("reset-timer");
 let numberQuery = document.getElementById("number");
 let timerOn;
-
 //EventListeners
+
 startTimerButtonQuery.addEventListener("click", buttonStartTimer);
 resetTimerButtonQuery.addEventListener("click", resetTimer);
 
 function buttonStartTimer() {
+    //If the timer is already counting down (timerOn===true), return empty. This way clicking start during timer doesn't interrupt
+    if (timerOn === true) {
+        return;
+    }
     timerOn = true;
     console.log("Start timer button pressed");
     let timeQuery = document.getElementById("timeInput").value;
