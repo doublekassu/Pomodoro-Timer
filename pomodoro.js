@@ -17,6 +17,7 @@ function buttonStartTimer() {
     console.log("Start timer button pressed");
     let timeQuery = document.getElementById("timeInput").value;
     console.log(`Starting time: ${timeQuery}`);
+
     //To get the starting value appear instantly on the screen, not after interval value
     numberQuery.innerHTML = timeQuery;
     const interval = setInterval(function() {
@@ -50,5 +51,4 @@ function resetTimer () {
     document.getElementById("timeInput").value = "";
     numberQuery.innerHTML = "Timer has been resetted";
 }
-
 

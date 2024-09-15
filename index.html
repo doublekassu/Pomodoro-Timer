@@ -11,7 +11,8 @@
             <h1>Pomodoro Timer</h1>
         </div>
         <div id="clock">
-            <input id="timeInput" placeholder="set time here" type="number"/>
+            <!--This forces the input to not have e, dots, commas etc. Only numbers -->
+            <input id="timeInput" placeholder="set time here" type="number" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"/>
             <p id="number">actual number comes here after pressing button</p>
            <button id="start-timer">START</button>
            <button id="reset-timer">RESET</button>
