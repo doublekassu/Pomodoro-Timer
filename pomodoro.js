@@ -15,11 +15,11 @@ function buttonStartTimer() {
     }
     timerOn = true;
     console.log("Start timer button pressed");
-    let timeQuery = document.getElementById("timeInput").value;
+    let timeQuery = document.getElementById("timeInput").value * 60;
     console.log(`Starting time: ${timeQuery}`);
 
     //To get the starting value appear instantly on the screen, not after interval value
-    numberQuery.innerHTML = timeQuery;
+    numberQuery.innerHTML = `${Math.floor(timeQuery/60)}:00`;
     const interval = setInterval(function() {
         if (timerOn === true) {
             if (timeQuery > 0) {
@@ -38,11 +38,13 @@ function buttonStartTimer() {
     }, 1000)
 }
 
-function updateCountdown(startNumber) {
-    if (startNumber >= 0) {
-        numberQuery.innerHTML = startNumber;
+function updateCountdown(currentNumber) {
+    if (currentNumber >= 0) {
+        numberQuery.innerHTML = `${Math.floor(currentNumber/60)}:${currentNumber%60}`;
     }
 }
+
+
 
 function resetTimer () {
     //Changes timerOn to false so buttonStartTimer() stops running
