@@ -1,0 +1,22 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+#clock {
+    border: 1px solid black;
+}
+
+#start-timer, #timeInput, #reset-timer{
+    display: block;
+    margin: auto;
+}
+
+#number {
+    text-align: center;
+}
