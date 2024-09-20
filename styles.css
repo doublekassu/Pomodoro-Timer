@@ -12,11 +12,22 @@ h1 {
     border: 1px solid black;
 }
 
-#start-timer, #timeInput, #reset-timer{
+#start-timer, #reset-timer{
     display: block;
     margin: auto;
 }
 
 #number {
+    text-align: center;
+}
+
+.timeInput {
+    display: inline-block;
+    margin: auto;
+    border: 1px solid blue;
+}
+
+#timeInputDiv {
+    /*Centers the timeInput fields*/
     text-align: center;
 }

@@ -3,23 +3,31 @@ const startTimerButtonQuery = document.querySelector("#start-timer");
 const resetTimerButtonQuery = document.getElementById("reset-timer");
 let numberQuery = document.getElementById("number");
 let timerOn;
-//EventListeners
+let timeInputMinutes = document.getElementById("timeInputMinutes");
+let timeInputSeconds = document.getElementById("timeInputSeconds");
 
+//EventListeners
 startTimerButtonQuery.addEventListener("click", buttonStartTimer);
 resetTimerButtonQuery.addEventListener("click", resetTimer);
 
 function buttonStartTimer() {
-    //If the timer is already counting down (timerOn===true), return empty. This way clicking start during timer doesn't interrupt
+
+    //If the timer is already counting down (timerOn===true), return empty. This way clicking start during ongoing timer doesn't interrupt it.
     if (timerOn === true) {
         return;
     }
     timerOn = true;
     console.log("Start timer button pressed");
-    let timeQuery = document.getElementById("timeInput").value * 60;
+    
+    if (checkForInvalidInputs()) {
+        return;
+    }
+    //Transform the inputs into seconds. The + before values transforms the values from a String to an Integer.
+    timeQuery = +timeInputMinutes.value * 60 + +timeInputSeconds.value;
     console.log(`Starting time: ${timeQuery}`);
 
     //To get the starting value appear instantly on the screen, not after interval value
-    numberQuery.innerHTML = `${Math.floor(timeQuery/60)}:00`;
+    numberQuery.innerHTML = `${Math.floor(timeQuery/60)}:${timeQuery%60}`;
     const interval = setInterval(function() {
         if (timerOn === true) {
             if (timeQuery > 0) {
@@ -31,6 +39,7 @@ function buttonStartTimer() {
                 numberQuery.innerHTML = "Time completed";
             }
         }
+
         //Clears the timer. Without this the old timer value stays after resetting timer
         else {
             clearInterval(interval);
@@ -40,17 +49,28 @@ function buttonStartTimer() {
 
 function updateCountdown(currentNumber) {
     if (currentNumber >= 0) {
+
+        //Base minutes (drop the decimals) and seconds with remainder by %60
         numberQuery.innerHTML = `${Math.floor(currentNumber/60)}:${currentNumber%60}`;
     }
 }
 
-
-
 function resetTimer () {
+    
     //Changes timerOn to false so buttonStartTimer() stops running
     console.log("reset button pressed");
     timerOn = false;
-    document.getElementById("timeInput").value = "";
+    timeInputMinutes.value = "";
+    timeInputSeconds.value = "";
     numberQuery.innerHTML = "Timer has been resetted";
 }
 
+const checkForInvalidInputs = () => {
+    if (timeInputSeconds.value > 59) {
+        alert("Please use the values between 0-59 as your seconds inputs! Continue by resetting the timer.");
+        return true;
+    }
+    else {
+        return false;
+    }
+}
