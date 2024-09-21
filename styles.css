@@ -35,3 +35,7 @@ h1 {
 .inputInstruction {
     text-align: center;
 }
+
+input {
+    width: 15%;
+}
