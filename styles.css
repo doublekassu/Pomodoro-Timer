@@ -27,7 +27,11 @@ h1 {
     border: 1px solid blue;
 }
 
-#timeInputDiv {
+.timeInputDiv {
     /*Centers the timeInput fields*/
+    text-align: center;
+}
+
+.inputInstruction {
     text-align: center;
 }

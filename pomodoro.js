@@ -20,6 +20,7 @@ function buttonStartTimer() {
     console.log("Start timer button pressed");
     
     if (checkForInvalidInputs()) {
+        resetTimer();
         return;
     }
     //Transform the inputs into seconds. The + before values transforms the values from a String to an Integer.
@@ -74,7 +75,7 @@ function resetTimer () {
 
 const checkForInvalidInputs = () => {
     if (timeInputSeconds.value > 59) {
-        alert("Please use the values between 0-59 as your seconds inputs! Continue by resetting the timer.");
+        alert("Please use the values between 0-59 as your seconds inputs!");
         return true;
     }
     else {
