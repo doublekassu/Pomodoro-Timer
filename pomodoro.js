@@ -27,7 +27,9 @@ function buttonStartTimer() {
     console.log(`Starting time: ${timeQuery}`);
 
     //To get the starting value appear instantly on the screen, not after interval value
-    numberQuery.innerHTML = `${Math.floor(timeQuery/60)}:${timeQuery%60}`;
+    if (timeQuery%60 <= 9) {
+        numberQuery.innerHTML = `${Math.floor(timeQuery/60)}:0${timeQuery%60}`;
+    }
     const interval = setInterval(function() {
         if (timerOn === true) {
             if (timeQuery > 0) {
@@ -48,10 +50,15 @@ function buttonStartTimer() {
 }
 
 function updateCountdown(currentNumber) {
-    if (currentNumber >= 0) {
+    if (currentNumber%60 <= 9) {
 
+        //If seconds part is <=9, display 0 in front of seconds
+        numberQuery.innerHTML = `${Math.floor(currentNumber/60)}:0${currentNumber%60}`;
+    }
+    else {
+        
         //Base minutes (drop the decimals) and seconds with remainder by %60
-        numberQuery.innerHTML = `${Math.floor(currentNumber/60)}:${currentNumber%60}`;
+        numberQuery.innerHTML = `${Math.floor(currentNumber/60)}:${currentNumber%60}`
     }
 }
 
