@@ -2,11 +2,14 @@
 const startTimerButtonQuery = document.querySelector("#start-timer");
 const resetTimerButtonQuery = document.getElementById("reset-timer");
 const numberQuery = document.getElementById("number");
-let timerOn;
+const pomodoroCycleQuery = document.getElementById("pomodoro-cycle");
+
 const timeInputMinutes = document.getElementById("timeInputMinutes");
 const timeInputSeconds = document.getElementById("timeInputSeconds");
 const pauseInputMinutes = document.getElementById("pauseInputMinutes");
 const pauseInputTimes = document.getElementById("pauseInputTimes");
+let timerOn;
+let currentPomodoroCycle = 0;
 
 const resetTimer = () => {
     
@@ -23,11 +26,11 @@ const resetTimer = () => {
 const buttonStartTimer = () => {
 
     //If the timer is already counting down (timerOn===true), return empty. This way clicking start during ongoing timer doesn't interrupt it.
-    if (timerOn === true) {
+    if (timerOn) {
         return;
     }
     timerOn = true;
-    console.log("Start timer button pressed");
+    console.log("Starting working timer");
     
     if (checkForInvalidInputs()) {
         resetTimer();
@@ -36,16 +39,18 @@ const buttonStartTimer = () => {
     //Transform the inputs into seconds. The + before values transforms the values from a String to an Integer.
     timeQuery = +timeInputMinutes.value * 60 + +timeInputSeconds.value;
     console.log(`Starting time: ${timeQuery}`);
+    updatePomodoroCycle(currentPomodoroCycle);
 
     //To get the starting value appear instantly on the screen, not after interval value
-    if (timeQuery%60 <= 9) {
-        numberQuery.innerHTML = `${Math.floor(timeQuery/60)}:0${timeQuery%60}`;
+    if (checkIfSecondsUnderTen(timeQuery)) {
+        numberQuery.innerHTML = `Working: ${Math.floor(timeQuery/60)}:0${timeQuery%60}`;
     }
+
     const interval = setInterval(() => {
         if (timerOn === true) {
             if (timeQuery > 0) {
                 updateCountdown("Working", timeQuery-1);
-                console.log(timeQuery-1);
+                console.log(`Working time: ${timeQuery-1}`);
                 timeQuery--;
             }
             else {
@@ -63,13 +68,18 @@ const buttonStartTimer = () => {
 }
 
 const pauseStartTimer = (pauseLength, pauseAmount) => {
-    pauseAmount--;
+    currentPomodoroCycle++;
     const interval = setInterval(() => {
         if (timerOn === true) {
             if (pauseLength > 0) {
                 updateCountdown("Having a pause", pauseLength-1);
-                console.log(`Pause time: ${pauseLength-1}`)
+                console.log(`Pause ${currentPomodoroCycle}/${pauseAmount} Pause time: ${pauseLength-1}`)
                 pauseLength--;
+            }
+            else if (currentPomodoroCycle >= pauseAmount) {
+                clearInterval(interval);
+                timerOn = false;
+                numberQuery.innerHTML = "Congrats on completing your Pomodoro!";
             }
             else {
                 clearInterval(interval);
@@ -81,10 +91,6 @@ const pauseStartTimer = (pauseLength, pauseAmount) => {
             clearInterval(interval);
         }
     }, 1000)
-    /*if (pauseAmount <= 0) {
-        clearInterval(interval);
-        numberQuery.innerHTML = "Congrats on completing your Pomodoro!";
-    }*/
 }
 
 //EventListeners
@@ -93,7 +99,7 @@ resetTimerButtonQuery.addEventListener("click", resetTimer);
 
 
 const updateCountdown = (timerConditionText, currentNumber) => {
-    if (currentNumber%60 <= 9) {
+    if (checkIfSecondsUnderTen(currentNumber)) {
 
         //If seconds part is <=9, display 0 in front of seconds
         numberQuery.innerHTML = `${timerConditionText}: ${Math.floor(currentNumber/60)}:0${currentNumber%60}`;
@@ -115,3 +121,20 @@ const checkForInvalidInputs = () => {
         return false;
     }
 }
+
+const updatePomodoroCycle = (currentPomodoroCycle) => {
+    currentPomodoroCycle++;
+    pomodoroCycleQuery.innerHTML = `${currentPomodoroCycle}/${pauseInputTimes.value}`;
+    console.log(`Current pomodoro cycle: ${currentPomodoroCycle}`);
+}
+
+const checkIfSecondsUnderTen = (timeValue) => {
+    if (timeValue%60 <= 9) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+console.log(checkIfSecondsUnderTen(75));

@@ -22,6 +22,7 @@
                 <input id="pauseInputMinutes" class="timeInput" placeholder="set pause length here (minutes)" type="number" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"/>
                 <input id="pauseInputTimes" class="timeInput" placeholder="set break amount here" type="number" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"/>
             </div>
+            <p id="pomodoro-cycle">Current cycle / break amount</p>
             <p id="number">actual number comes here after pressing button</p>
            <button id="start-timer">START</button>
            <button id="reset-timer">RESET</button>
