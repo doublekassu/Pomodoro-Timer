@@ -22,10 +22,14 @@
                 <input id="pauseInputMinutes" class="timeInput" placeholder="set pause length here (minutes)" type="number" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"/>
                 <input id="pauseInputTimes" class="timeInput" placeholder="set break amount here" type="number" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"/>
             </div>
+        </div>
+        <div id="buttons-div">
+            <button id="start-timer">START</button>
+            <button id="reset-timer">RESET</button>
+        </div>
+        <div id="display-number">
+            <p id="number">00:00</p>
             <p id="pomodoro-cycle">Current cycle / break amount</p>
-            <p id="number">actual number comes here after pressing button</p>
-           <button id="start-timer">START</button>
-           <button id="reset-timer">RESET</button>
         </div>
         <script src="pomodoro.js"></script>
     </body>    

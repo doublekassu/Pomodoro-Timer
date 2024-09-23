@@ -8,6 +8,8 @@ const timeInputMinutes = document.getElementById("timeInputMinutes");
 const timeInputSeconds = document.getElementById("timeInputSeconds");
 const pauseInputMinutes = document.getElementById("pauseInputMinutes");
 const pauseInputTimes = document.getElementById("pauseInputTimes");
+let timerDiv = document.getElementById("display-number")
+
 let timerOn;
 let currentPomodoroCycle = 0;
 
@@ -21,6 +23,7 @@ const resetTimer = () => {
     pauseInputMinutes.value = "";
     pauseInputTimes.value = "";
     numberQuery.innerHTML = "Timer has been resetted";
+    timerDiv.style.backgroundColor = "#ff0077";
 }
 
 const buttonStartTimer = () => {
@@ -69,6 +72,7 @@ const buttonStartTimer = () => {
 
 const pauseStartTimer = (pauseLength, pauseAmount) => {
     currentPomodoroCycle++;
+    updateCountdown("Having a pause", pauseLength);
     const interval = setInterval(() => {
         if (timerOn === true) {
             if (pauseLength > 0) {
@@ -80,6 +84,7 @@ const pauseStartTimer = (pauseLength, pauseAmount) => {
                 clearInterval(interval);
                 timerOn = false;
                 numberQuery.innerHTML = "Congrats on completing your Pomodoro!";
+                timerDiv.style.backgroundColor = "#00bbff";
             }
             else {
                 clearInterval(interval);
