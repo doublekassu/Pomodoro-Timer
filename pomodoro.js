@@ -23,6 +23,8 @@ const resetTimer = () => {
     pauseInputMinutes.value = "";
     pauseInputTimes.value = "";
     numberQuery.innerHTML = "Timer has been resetted";
+    pomodoroCycleQuery.innerHTML = "";
+    currentPomodoroCycle = 0;
     timerDiv.style.backgroundColor = "#ff0077";
 }
 
@@ -122,6 +124,10 @@ const checkForInvalidInputs = () => {
         alert("Please use the values between 0-59 as your seconds inputs!");
         return true;
     }
+    else if (timeInputSeconds.value === "" || pauseInputMinutes.value === "" || pauseInputTimes.value === "") {
+        alert("Only minutes can be left empty!")
+        return true;
+    }
     else {
         return false;
     }
@@ -141,5 +147,3 @@ const checkIfSecondsUnderTen = (timeValue) => {
         return false;
     }
 }
-
-console.log(checkIfSecondsUnderTen(75));

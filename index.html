@@ -11,13 +11,13 @@
             <h1>Pomodoro Timer</h1>
         </div>
         <div id="clock">
-            <p class="inputInstruction">Please set your working time here:</p>          
+            <p class="inputInstruction">Set working time:</p>          
             <div class ="timeInputDiv">      
                 <!--This forces the input to not have e, dots, commas etc. Only numbers -->
                 <input id="timeInputMinutes" class="timeInput" placeholder="set time here (minutes)" type="number" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"/>
                 <input id="timeInputSeconds" class="timeInput" placeholder="set time here (seconds)" type="number" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"/>
             </div>
-            <p class="inputInstruction">Pause length and how many times here:</p>
+            <p class="inputInstruction">Set pause length and amount:</p>
             <div class="timeInputDiv">
                 <input id="pauseInputMinutes" class="timeInput" placeholder="set pause length here (minutes)" type="number" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"/>
                 <input id="pauseInputTimes" class="timeInput" placeholder="set break amount here" type="number" onkeydown="javascript: return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"/>
@@ -30,6 +30,10 @@
         <div id="display-number">
             <p id="number">00:00</p>
             <p id="pomodoro-cycle">Current cycle / break amount</p>
+        </div>
+        <div id="pomodoro-information">
+            <h2>What is Pomodoro?</h2>
+            <p class="information-text">Pomodoro is a time management method to help people get stuff actually done.<br>Main idea of Pomodoro is to set a short enough working time to be fully locked in and have a short pause after each working period.</p>
         </div>
         <script src="pomodoro.js"></script>
     </body>    
